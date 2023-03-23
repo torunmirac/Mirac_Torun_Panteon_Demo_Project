@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6945327297854967288
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6945327297854967174}
+  - component: {fileID: 6945327297854967175}
+  m_Layer: 0
+  m_Name: ObjectPools
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6945327297854967174
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6945327297854967288}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.8280554, y: 4.2709875, z: -0.9313358}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6945327297854967175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6945327297854967288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a17b2299499c942e19b3677ad5c2d604, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeBarrack: []
+  passiveBarrack: []
+  activePowerPlant: []
+  passivePowerPlant: []
+  activeBlueSoldier: []
+  activeGreenSoldier: []
+  activeRedSoldier: []
+  passiveBlueSoldier: []
+  passiveGreenSoldier: []
+  passiveRedSoldier: []
+  Barrack: {fileID: 5584524402614568175, guid: 0c251064b917645c4be787603bc47f8c, type: 3}
+  powerPlant: {fileID: 593883744284091890, guid: 8f9c5e44b7edd43399535969d4fd0368,
+    type: 3}
+  blueSoldier: {fileID: 7147793450687383429, guid: a61a6227ece46491eaa3bbf1358f7045,
+    type: 3}
+  greenSoldier: {fileID: 4267677347364958265, guid: 43f509b91e613489eb11c372647123fe,
+    type: 3}
+  redSoldier: {fileID: 175580063026110933, guid: fa7cc3fe970c74840b307b7952946647,
+    type: 3}
