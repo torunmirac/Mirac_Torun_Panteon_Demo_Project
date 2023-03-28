@@ -19,6 +19,7 @@ public enum GameEvent
     OnAddSoldier,
     OnAttackBuild,
     OnResetGameObject,
+    OnWarningSoldier,
     OnDoneBuild,
     OnStopBuildUnit,
     OnEnableBuild,

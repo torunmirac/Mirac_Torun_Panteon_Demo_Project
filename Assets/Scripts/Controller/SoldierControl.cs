@@ -230,11 +230,12 @@ public class SoldierControl : AbstractNumber
 
     void OnAddSoldier()
     {
+        colliderable = false;
+
         if (soldierManagerS.selectedSoldier[0].gameObject == gameObject)
         {
             transform.GetChild(0).gameObject.SetActive(true);
             transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
-            colliderable = false;
             MoveAble = true;
         }
     }
@@ -306,9 +307,10 @@ public class SoldierControl : AbstractNumber
             }
         }
 
-        if (other.gameObject.CompareTag("Soldier") && transform.GetChild(1).gameObject != other.gameObject && currentMoveBuildEnum != MoveBuildEnum.Red)
+        if (other.gameObject.CompareTag("Soldier") && transform.GetChild(1).gameObject != other.gameObject && currentMoveBuildEnum != MoveBuildEnum.Red&& colliderable)
         {
-            switch (gameObject.tag)
+            Debug.Log("aa");
+            switch (other.gameObject.transform.parent.tag)
             {
                 case "SoldierBlue":
                     CollisionSoldier(gameObject, ref healthCount, 2, HealthyBar, health, managerS.constructedBuilding, soldierManagerS.blueSoldier, objectPoolsSoldier.passiveBlueSoldier, objectPoolsSoldier.activeBlueSoldier);

@@ -15,7 +15,7 @@ public class PowerPlantControl : AbstractNumber
     SoldierManager soldierManager3;
     UIManager UI3;
     ObjectPools objectPools3;
-    public bool isInside = false, Clickable = true;
+    public bool isInside = false, Clickable = true, colliderable = false;
     private Vector2 lastPosition;
     public bool MoveAble = false, rightClick = false;
     [SerializeField] bool start = false, select = true;
@@ -112,7 +112,7 @@ public class PowerPlantControl : AbstractNumber
                 soldierManager3.targetPos = transform.position;
                 EventManager.Broadcast(GameEvent.OnGo);
                 Invoke("AttackPowerPlant", .07f);
-               // StartCoroutine(AttackPowerPlant());
+                // StartCoroutine(AttackPowerPlant());
                 rightClick = false;
             }
         }
@@ -143,6 +143,7 @@ public class PowerPlantControl : AbstractNumber
         EventManager.AddHandler(GameEvent.OnDontMove, OnDontMove);
         EventManager.AddHandler(GameEvent.OnOkeyAttack, OnOkeyAttack);
         EventManager.AddHandler(GameEvent.OnResetGameObject, OnResetGameObject);
+        EventManager.AddHandler(GameEvent.OnAddSoldier, OnAddSoldier);
 
 
 
@@ -156,6 +157,7 @@ public class PowerPlantControl : AbstractNumber
         EventManager.RemoveHandler(GameEvent.OnDontMove, OnDontMove);
         EventManager.RemoveHandler(GameEvent.OnOkeyAttack, OnOkeyAttack);
         EventManager.RemoveHandler(GameEvent.OnResetGameObject, OnResetGameObject);
+        EventManager.RemoveHandler(GameEvent.OnAddSoldier, OnAddSoldier);
 
 
     }
@@ -205,6 +207,7 @@ public class PowerPlantControl : AbstractNumber
         }
         Objects(false);
         OnDontMove();
+        colliderable = true;
         rightClick = false;
     }
 
@@ -235,6 +238,8 @@ public class PowerPlantControl : AbstractNumber
         }
         select = true;
         ChangeColor(Color.green);
+        colliderable = true;
+
     }
 
     void OnOkeyAttack()
@@ -260,6 +265,10 @@ public class PowerPlantControl : AbstractNumber
         }
     }
 
+    void OnAddSoldier()
+    {
+        colliderable = false;
+    }
     #endregion
 
     #region Collision Voids
@@ -273,7 +282,7 @@ public class PowerPlantControl : AbstractNumber
             UI3.currentMoveBuildEnum = MoveBuildEnum.Red;
 
         }
-        if (!soldierlist.Contains(other.gameObject) && currentMoveBuildEnum != MoveBuildEnum.Red)
+        if (!soldierlist.Contains(other.gameObject) && currentMoveBuildEnum != MoveBuildEnum.Red && colliderable)
         {
             switch (other.gameObject.tag)
             {

@@ -16,7 +16,7 @@ public class BarrackControl : AbstractNumber
     SoldierManager soldierManager3;
     UIManager UI3;
     ObjectPools ObjectPoolsBarrack;
-    public bool isInside = false, Clickable = true;
+    public bool isInside = false, Clickable = true, colliderable = false;
     private Vector2 lastPosition;
     public bool MoveAble = false, rightClick = false;
     [SerializeField] bool start = false, select = true;
@@ -116,7 +116,7 @@ public class BarrackControl : AbstractNumber
                 soldierManager3.targetPos = transform.position;
                 EventManager.Broadcast(GameEvent.OnGo);
                 Invoke("AttackBarrac", .07f);
-               // StartCoroutine(AttackPowerPlant());
+                // StartCoroutine(AttackPowerPlant());
                 rightClick = false;
             }
         }
@@ -144,6 +144,7 @@ public class BarrackControl : AbstractNumber
         EventManager.AddHandler(GameEvent.OnDontMove, OnDontMove);
         EventManager.AddHandler(GameEvent.OnOkeyAttack, OnOkeyAttack);
         EventManager.AddHandler(GameEvent.OnResetGameObject, OnResetGameObject);
+        EventManager.AddHandler(GameEvent.OnAddSoldier, OnAddSoldier);
 
 
     }
@@ -156,6 +157,7 @@ public class BarrackControl : AbstractNumber
         EventManager.RemoveHandler(GameEvent.OnDontMove, OnDontMove);
         EventManager.RemoveHandler(GameEvent.OnOkeyAttack, OnOkeyAttack);
         EventManager.RemoveHandler(GameEvent.OnResetGameObject, OnResetGameObject);
+        EventManager.RemoveHandler(GameEvent.OnAddSoldier, OnAddSoldier);
 
     }
 
@@ -200,6 +202,7 @@ public class BarrackControl : AbstractNumber
         Objects(false);
         OnDontMove();
         rightClick = false;
+        colliderable = true;
     }
 
     void OnMove()
@@ -226,6 +229,7 @@ public class BarrackControl : AbstractNumber
 
         }
         select = true;
+        colliderable = true;
         ChangeColor(Color.green);
     }
 
@@ -251,6 +255,11 @@ public class BarrackControl : AbstractNumber
         }
     }
 
+    void OnAddSoldier()
+    {
+        colliderable = false;
+    }
+
     #endregion
 
     #region Collision Event
@@ -263,7 +272,7 @@ public class BarrackControl : AbstractNumber
             UI3.currentMoveBuildEnum = MoveBuildEnum.Red;
 
         }
-        if (!soldierlist.Contains(other.gameObject) && currentMoveBuildEnum != MoveBuildEnum.Red)
+        if (!soldierlist.Contains(other.gameObject) && currentMoveBuildEnum != MoveBuildEnum.Red && colliderable)
         {
             switch (other.gameObject.tag)
             {
